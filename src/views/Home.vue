@@ -11,8 +11,28 @@
               <el-avatar shape="square" size="large" :src="logoSrc"></el-avatar>
              </div>
             <div class="block"> <label>テストケース管理ツール</label>   </div>
+            <div class="navMenu" style="width:40%;float:right;height:inherit;">
+              <el-menu
+                :default-active="activePage"
+                router
+                class="el-menu-demo"
+                mode="horizontal"
+                background-color="#455b9d"
+                text-color="#fff"
+                @select="SelectChanged"
+                style="height:inherit"
+                active-text-color="#ffd04b">
+                <el-menu-item index="/testCaseIndex" style="height:100%">TEST CASE</el-menu-item>
+                <el-menu-item index="/testPlanIndex" style="height:100%">TEST PLAN</el-menu-item>
+                <el-menu-item index="/testRunIndex" style="height:100%">TEST RUN</el-menu-item>
+                <el-menu-item index="/settingIndex" style="height:100%">SETTING</el-menu-item>
+              </el-menu>
+              </div> 
           </el-main>
         </el-container>
+      </div>
+      <div>
+       <router-view/>
       </div>
     </div>
   </div>
@@ -23,23 +43,26 @@
 import api from "../assets/apiData";
 import storage from "../assets/localstorage"
 import LoginfoBar from "../components/LoginfoBar"
-
 export default {
   data() {
     return {
       logoSrc:require('../assets/image/logo.png'),
       LoginInfo:{},
+      activePage:"/testCaseIndex"
+   
     };
   },
   components: {
-    LoginfoBar
+    LoginfoBar,
+  
   },
   created(){
+   
    var logStr=storage.getItem("loginInfo");
    if(logStr==null || logStr==""){
-     debugger;
       if (this.$router.currentRoute.name != "Login") {
         this.$router.replace("/");
+
       }
    }
    else{
@@ -48,43 +71,14 @@ export default {
 
   },
   methods: {
-  
+    SelectChanged(index){
+     
+    }
     
   },
 };
 </script>
 <style scoped>
-.Title {
-  font-size: 35px;
-  color: aliceblue;
-  opacity: 0.75;
-  line-height: 170px;
-  margin: 0;
-}
-.UserForm {
-  border: 1px solid #fdcd64;
-  background-color: #ffebc1;
-  width: 400px;
-  margin: auto;
-  position: relative;
-  top: 100px;
-  border-radius: 5px;
-}
-.package {
-  width: 350px;
-  margin: auto;
-  margin-top: 30px;
-  margin-bottom: 25px;
-}
-.inputText {
-  width: 50%;
-}
-.Subbtn {
-  width: 100%;
-}
-.el-select {
-  display: block;
-}
 .el-header {
   background-color: #2c3957;
   text-align: center;

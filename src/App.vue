@@ -11,6 +11,7 @@
   -moz-osx-font-smoothing: grayscale;
   font-size: 14px;
   text-align: left;
+  min-width: 1366px !important;
 }
 body{
   margin: 0;
